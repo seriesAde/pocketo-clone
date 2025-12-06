@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>product</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-
 </head>
 
 <body>
+
+
     <header class="fixed w-full z-50">
         <div class=" bg-blue-700 py-3 text-white text-sm text-center">✨80% Off with Code BF80✨ <span
                 class="border-b-1"><a href="#">See
@@ -106,181 +106,22 @@
                 <ul class="flex align-middle gap-6">
                     <li><img class="w-7" src="./images/icons/search_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
                     </li>
-                    <a href="./login.html">
-                        <li><img class="w-7" src="./images/icons/person_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg"
-                                alt="">
-                    </a>
-                    </li>
-                    <li><a id="cartHiddenBtn" href="#">
-                            <img class="w-7"
-                                src="./images/icons/add_shopping_cart_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg"
-                                alt="">
-                        </a>
+                    <li><a href="./login.html"><img class="w-7"
+                                src="./images/icons/person_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                        </a> </li>
+                    <li><img class="w-7"
+                            src="./images/icons/add_shopping_cart_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <!-- cart -->
-    <div id="cartHidden" class="hidden">
-        <div class=" absolute z-100 w-full h-[83vh] mt-[8%] flex">
-            <div class="w-full h-2px bg-black opacity-10">
-            </div>
-            <div id="cart" class="w-[70%] max-w-2xl  bg-white p-6 shadow-lg rounded-lg overflow-auto ">
-
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">Your Cart</h2>
-                    <button class="text-gray-400 hover:text-gray-600">
-                        <!-- Close Icon (using a simple 'X') -->
-                        <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Progress Indicator Placeholder (as seen at the top right of the image) -->
-                <div class="mb-6">
-                    <div class="flex items-center">
-                        <div class="flex-grow bg-blue-100 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
-                        </div>
-                        <svg xmlns="www.w3.org" class="h-6 w-6 text-blue-500 ml-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Cart Item List -->
-                <div class="mt-10">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-5 w-full ">
-                            <!-- Item Image Placeholder -->
-                            <img src="./images/PK-5050-Hero-Poketo_Essentials_-_Summer_2024_Collection.webp"
-                                alt="Headspace x Poketo Pens" class="w-25 h-30 rounded object-cover">
-                            <div class=" w-full flex flex-col justify-between h-24">
-
-                                <div class="flex justify-between items-end w-full">
-                                    <p class="text-sm font-medium text-black">Headspace x Poketo Pens</p>
-                                    <button class="text-gray-400 hover:text-gray-600">
-                                        <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
-
-                                </div>
-                                <div class="flex justify-between items-end w-full">
-                                    <div class="">
-                                        <p class="text-sm font-medium text-black">$14.00</p>
-                                    </div>
-                                    <div class="flex items-center border border-[#0085ca] rounded-full">
-                                        <button
-                                            class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-l-full">-</button>
-                                        <span class="px-3 py-1 text-sm">1</span>
-                                        <button
-                                            class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-r-full">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Totals Summary -->
-                <div class="mt-5 pt-4">
-                    <div class="flex justify-between items-center text-sm font-medium text-gray-800">
-                        <span>Total (<span>1</span> item)</span>
-                        <span>$14.00</span>
-                    </div>
-                    <p class=" font-medium text-black mt-1">Taxes, shipping & promos calculated at checkout</p>
-                </div>
-
-                <!-- Checkout Button -->
-                <div class="mt-5">
-                    <button
-                        class="w-full bg-blue-600 hover:bg-blue-400 text-white font-semibold py-5 px-4 rounded-full flex items-center justify-center shadow-md">
-                        <svg xmlns="www.w3.org" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm0-10h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
-                        </svg>
-                        CHECKOUT
-                    </button>
-                </div>
-
-                <!-- Payment Icons -->
-                <div class="mt-5 flex justify-center gap-15 ">
-                    <!-- Placeholders for payment icons -->
-                    <img class="size-8" src="./images/icons/apple-pay.png" alt="Google Pay" class="h-4">
-                    <img class="size-5" src="./images/icons/search (1).png" alt="Google Pay" class="h-4">
-                    <img class="size-5" src="./images/icons/visa.png" alt="Visa" class="h-4">
-                    <img class="size-5" src="./images/icons/card.png" alt="Mastercard" class="h-4">
-                    <img class="size-5" src="./images/icons/amex.png" alt="American Express" class="h-4">
-                </div>
-
-            </div>
-        </div>
+    <div id="HeadspaceCollection" class="grid grid-cols-4 w-[90%] m-auto overflow-x-auto gap-8 snap-x  ">
     </div>
 
 
-    <div class="slider1 flex w-full  flex-none box-border items-center pt-30 bg-yellow-500 ">
-        <div class="planning text-black px-20 box-border  w-[55%] ">
-            <h1 class="capitalize  text-5xl font-bold  ">shop all</h1>
-            <p class="py-5 font-medium ">From desk to dinner table, our range of fun, functional stationery
-                and home
-                goods brings art and design into your every day. </p>
-
-
-        </div>
-        <div class=" w-[50%] "><img class="w-full" src="./images/pkImages/PK-PLP-Back_to_School_Sale_2024.webp" alt="">
-        </div>
-
-    </div>
-    <!-- filter -->
-    <div class="mt-20 flex justify-between">
-        <div class="flex items-center gap-4 p-5 px-12">
-            <p class="capitalize text-sm font-medium">filter:</p>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">availability <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">price <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-        </div>
-        <div class="flex items-center gap-4 p-5 px-12">
-            <p class="capitalize text-sm font-medium">sort by:</p>
-            <a id="" href="#" class="border border-blue-500 rounded-full font-medium px-6 text-sm py-1">
-                <p id="" class="flex py-2 gap-10 capitalize align-middle ">featured <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">price <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-        </div>
-
-    </div>
-
-    <div id="HeadspaceCollection" class=" grid grid-cols-4 w-[90%] m-auto overflow-x-auto gap-8 snap-x">
-
-    </div>
-    <!-- footer -->
-    <footer class="bg-blue-500 text-white mt-10 pt-20">
+    <footer class="bg-blue-500 text-white  pt-20">
         <div class=" text-center ">
             <img class="w-36 m-auto" src="./images/pkImages/pk-logotype-light.png" alt="">
             <a class="flex   justify-center align-middle hover:text-gray-200 font-medium my-5" href="#">Shop the pattern
@@ -356,7 +197,7 @@
                 </ul>
             </div>
         </div>
-        <div class=" flex justify-between px-20 pb-5">
+        <div class=" flex justify-between px-20 pb-5 hover:backdrop:">
             <div class="">
                 <p class="capitalize font-medium ">© 2025 Pattern Brands
                 </p>
@@ -367,9 +208,10 @@
                 <li><a class="capitalize font-medium " href="#">accessibility </a></li>
             </ul>
         </div>
+
+        <div class="text-right"><small class="w-full px-2 bg-red-600">#cloned</small></div>
     </footer>
 </body>
-<script src="./scripts/shopAll.js"></script>
-<script src="./scripts/cart.js"></script>
+<script src="./scripts/product.js"></script>
 
 </html>

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-
+    <!-- <script src="./tailwind.js"></script> -->
+    <link rel="stylesheet" href="./styles/home.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                     </p>
                 </a>
                 <ul id="hidden"
-                    class="bg-white absolute rounded-lg border transition-all duration-200 ease-in-out border-gray-300 w-80">
+                    class=" bg-white absolute rounded-lg border transition-all duration-200 ease-in-out border-gray-300 w-80">
                     <li class="border-b border-gray-300">
                         <a class="flex items-center gap-3 py-3 px-4" href="#">
                             <img src="./images/pkImages/miracle_favicon.png" class="w-6 h-6" alt="">
@@ -106,11 +106,9 @@
                 <ul class="flex align-middle gap-6">
                     <li><img class="w-7" src="./images/icons/search_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
                     </li>
-                    <a href="./login.html">
-                        <li><img class="w-7" src="./images/icons/person_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg"
-                                alt="">
-                    </a>
-                    </li>
+                    <li><a href="./login.html"><img class="w-7"
+                                src="./images/icons/person_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                        </a> </li>
                     <li><a id="cartHiddenBtn" href="#">
                             <img class="w-7"
                                 src="./images/icons/add_shopping_cart_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg"
@@ -121,7 +119,6 @@
             </div>
         </nav>
     </header>
-
     <!-- cart -->
     <div id="cartHidden" class="hidden">
         <div class=" absolute z-100 w-full h-[83vh] mt-[8%] flex">
@@ -228,59 +225,40 @@
     </div>
 
 
-    <div class="slider1 flex w-full  flex-none box-border items-center pt-30 bg-yellow-500 ">
-        <div class="planning text-black px-20 box-border  w-[55%] ">
-            <h1 class="capitalize  text-5xl font-bold  ">shop all</h1>
-            <p class="py-5 font-medium ">From desk to dinner table, our range of fun, functional stationery
-                and home
-                goods brings art and design into your every day. </p>
+    <div class="pt-30">
+        <form action="" class="w-[35%] m-auto mt-10 block">
+            <h1 class="text-5xl font-bold text-center capitalize">sign up</h1>
+            <div class="mt-10">
+                <input
+                    class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black outline-none placeholder:text-gray-700"
+                    type="text" placeholder="First name" name="" id="registerInputFirstname">
+            </div>
+            <div class="mt-10">
+                <input
+                    class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black outline-none placeholder:text-gray-700"
+                    type="text" placeholder="Last name" name="" id="registerInputLastname">
+            </div>
+            <div class="mt-10">
+                <input
+                    class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black outline-none placeholder:text-gray-700"
+                    type="email" placeholder="Email" name="" id="registerInputEmail">
+            </div>
+            <div class="mt-10">
+                <input
+                    class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black outline-none placeholder:text-gray-700"
+                    type="password" placeholder="password" name="" id="registerInputPwd">
+            </div>
 
 
-        </div>
-        <div class=" w-[50%] "><img class="w-full" src="./images/pkImages/PK-PLP-Back_to_School_Sale_2024.webp" alt="">
-        </div>
+            <div class="mt-10"> <button id="registerButton"
+                    class="bg-blue-500 hover:bg-blue-400 text-white py-4 font-medium rounded-full w-full m-auto">Create</button>
+            </div>
 
-    </div>
-    <!-- filter -->
-    <div class="mt-20 flex justify-between">
-        <div class="flex items-center gap-4 p-5 px-12">
-            <p class="capitalize text-sm font-medium">filter:</p>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">availability <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">price <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-        </div>
-        <div class="flex items-center gap-4 p-5 px-12">
-            <p class="capitalize text-sm font-medium">sort by:</p>
-            <a id="" href="#" class="border border-blue-500 rounded-full font-medium px-6 text-sm py-1">
-                <p id="" class="flex py-2 gap-10 capitalize align-middle ">featured <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-            <a id="" href="#" class="text-sm font-medium">
-                <p id="" class="flex py-2 capitalize align-middle ">price <span><img
-                            src="./images/icons/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
-                            alt=""></span>
-                </p>
-            </a>
-        </div>
 
+        </form>
     </div>
 
-    <div id="HeadspaceCollection" class=" grid grid-cols-4 w-[90%] m-auto overflow-x-auto gap-8 snap-x">
-
-    </div>
-    <!-- footer -->
-    <footer class="bg-blue-500 text-white mt-10 pt-20">
+    <footer class="bg-blue-500 text-white mt-5 pt-20">
         <div class=" text-center ">
             <img class="w-36 m-auto" src="./images/pkImages/pk-logotype-light.png" alt="">
             <a class="flex   justify-center align-middle hover:text-gray-200 font-medium my-5" href="#">Shop the pattern
@@ -369,7 +347,7 @@
         </div>
     </footer>
 </body>
-<script src="./scripts/shopAll.js"></script>
+<script src="./scripts/register.js"></script>
 <script src="./scripts/cart.js"></script>
 
 </html>

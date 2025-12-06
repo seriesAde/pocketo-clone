@@ -1,41 +1,7 @@
-let products = [
-    {
-        image: "./images/pkImages/PK-FeelItAllGelPens-Product-1.webp",
-        description: "Headspace X poketo pens",
-        hoverIMG: "./images/pkImages/PK-FeelItAllGelPens-Product-2.webp",
-        price: 14
-    },
-    {
-        image: "./images/pkImages/PK-loveYourMindJournal-Product-1.webp",
-        description: "Headspace X poketo journal",
-        hoverIMG: "./images/pkImages/PK-loveYourMindJournal-Product-2.webp",
-        price: 28
-    },
-    {
-        image: "./images/pkImages/PK-MentalNotes-Product-1.webp",
-        description: "Headspace X poketo sticky notes",
-        hoverIMG: "./images/pkImages/PK-MentalNotes-Product-2.webp",
-        price: 8
-    },
-    {
-        image: "./images/pkImages/1-PK-Headspace-MindfulnessCards.jpg",
-        description: "Headspace X poketo mindfulness cards",
-        hoverIMG: "./images/pkImages/PK-Headspace-MindfulnessCards-1.jpg",
-        price: 15
-    },
-    {
-        image: "./images/pkImages/YieldXHeadspace-instantsunshine-product.webp",
-        description: "Headspace X YIELD instant sunshine candle",
-        hoverIMG: "./images/pkImages/HeadspaceCollabPoketoandyield1940-pdpv1copia_6772a246-58c9-4f18-902f-fc2ba7e9e561.jpg",
-        price: "sold out"
-    },
-    {
-        image: "./images/pkImages/PK-EverydayMindfulnessCalendar-Product-1.webp",
-        description: "Headspace X poketo calendar",
-        hoverIMG: "./images/pkImages/PK-EverydayMindfulnessCalendar-Product-2.webp",
-        price: 24
-    }
-];
+
+
+
+
 let HeadspaceCollection = document.getElementById("HeadspaceCollection")
 let heroSlider = document.getElementById("heroSlider")
 let scrollLeft = document.getElementById("scrollLeft")
@@ -48,15 +14,22 @@ let leftBtn = document.getElementById("leftBtn")
 let pocketoPaTag = document.getElementById("pocketoPaTag")
 let hidden = document.getElementById("hidden")
 let removePocketop = pocketoP
+let cartHidden = document.getElementById("cartHidden")
+let cartHiddenBtn = document.getElementById("cartHiddenBtn")
 
+
+cartHiddenBtn.addEventListener("click", () => {
+    // body.classList.add("overflow-hidden");
+    cartHidden.classList.remove("hidden");
+});
+
+// pocketo window scroll hide
 window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
         pocketoP.classList.add("opacity-0", "-translate-y-2", "pointer-events-none", "max-h-0");
     } else {
         pocketoP.classList.remove("opacity-0", "-translate-y-2", "pointer-events-none", "max-h-0");
     }
-
-
 });
 let hide = true
 hidden.classList.add("opacity-0", "-translate-y-6", "pointer-events-none", "max-h-0");
@@ -73,19 +46,25 @@ pocketoPaTag.addEventListener("click", () => {
     }
 })
 
-function displayPkHeadspace() {
-    let collection = ``;
-    const loopItems = [...products, ...products, ...products];
 
-    for (let i = 0; i < loopItems.length; i++) {
-        collection += `
+
+async function displayProducts() {
+    const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
+    let vendor = JSON.parse(localStorage.getItem("My_vendor"));
+    let id = vendor.vendor_id
+    try {
+        let result = await fetch(`${baseApi}/products?merchant_id=${id}`)
+        let data = await result.json();
+        collection = "";
+        data.data.forEach(prod => {
+            collection += `
             <div class="card flex-none w-[25%] snap-start">
                 <div class="img-wrapper relative w-full">
                     <img 
                         class="w-full transition-opacity duration-300" 
-                        src="${loopItems[i].image}" 
-                        data-hover="${loopItems[i].hoverIMG}"
-                        data-original="${loopItems[i].image}"
+                        src="${prod.image}" 
+                        data-hover="${prod.images[1]}"
+                        data-original="${prod.images[0]}"
                     />
 
                     <button class="hover-btn cursor-pointer w-[80%] m-auto absolute font-bold  bottom-4 left-1/2 -translate-x-1/2 
@@ -94,46 +73,46 @@ function displayPkHeadspace() {
                     </button>
                 </div>
 
-                <p class="font-medium text-2xl ">${loopItems[i].description}</p>
-                <h5 class="font-medium text-lg">$${loopItems[i].price}</h5>
+                <p class="font-medium text-2xl ">${prod.title}</p>
+                <h5 class="font-medium text-lg">${prod.price}</h5>
             </div>
         `;
-    }
-
-    HeadspaceCollection.innerHTML = collection;
-
-    // JS hover 
-    let wrappers = HeadspaceCollection.querySelectorAll(".img-wrapper");
-
-    for (let i = 0; i < wrappers.length; i++) {
-        let wrapper = wrappers[i];
-        let img = wrapper.querySelector("img");
-        let btn = wrapper.querySelector(".hover-btn");
-
-        wrapper.addEventListener("mouseenter", () => {
-            img.style.opacity = 0;
-            btn.style.opacity = 1; // fade button in
-
-            setTimeout(() => {
-                img.src = img.dataset.hover;
-                img.style.opacity = 1;
-            }, 200);
+            HeadspaceCollection.innerHTML = collection
         });
 
-        wrapper.addEventListener("mouseleave", () => {
-            img.style.opacity = 0;
-            btn.style.opacity = 0; // fade button out
+        let container = document.querySelectorAll(".img-wrapper")
+        container.forEach(item => {
+            let img = item.querySelector("img");
+            let btn = item.querySelector(".hover-btn");
 
-            setTimeout(() => {
-                img.src = img.dataset.original;
-                img.style.opacity = 1;
-            }, 200);
+            item.addEventListener("mouseenter", () => {
+                img.style.opacity = 0;
+                btn.style.opacity = 1; // fade button in
+
+                setTimeout(() => {
+                    img.src = img.dataset.hover;
+                    img.style.opacity = 1;
+                }, 200);
+            });
+
+            item.addEventListener("mouseleave", () => {
+                img.style.opacity = 0;
+                btn.style.opacity = 0; // fade button out
+
+                setTimeout(() => {
+                    img.src = img.dataset.original;
+                    img.style.opacity = 1;
+                }, 200);
+            });
         });
+    } catch (error) {
+        console.log(error)
     }
 }
+displayProducts()
 
 
-displayPkHeadspace();
+
 let singleLoopWidth;
 requestAnimationFrame(() => {
     singleLoopWidth = HeadspaceCollection.scrollWidth / 3;
@@ -142,8 +121,7 @@ requestAnimationFrame(() => {
 });
 
 
-
-
+// infinite scroll card
 HeadspaceCollection.addEventListener("scroll", () => {
 
     if (!singleLoopWidth) return;
@@ -183,8 +161,6 @@ function tick() {
 tick();
 
 
-
-
 function scrollContainer(container, amount) {
     container.scrollBy({
         left: amount,
@@ -192,6 +168,10 @@ function scrollContainer(container, amount) {
 
     });
 }
+
+
+
+
 
 let scrollAmount;
 if (firstcard) {
@@ -209,18 +189,15 @@ if (heroSlider) {
     heroScrollAmount = 360;
 }
 
+
+
+// infinite btn
 function leftScroll(direction) {
     direction.addEventListener('click', () => {
         scrollContainer(HeadspaceCollection, -scrollAmount); // scroll left for cards
     });
 }
 leftScroll(scrollLeft)
-function heroLeftScroll(direction) {
-    direction.addEventListener('click', () => {
-        scrollContainer(heroSlider, -heroScrollAmount); // scroll left for hero
-    });
-}
-heroLeftScroll(leftBtn)
 
 function rightScroll(direction) {
     direction.addEventListener('click', () => {
@@ -228,11 +205,21 @@ function rightScroll(direction) {
     });
 
 }
-rightScroll(rightBtn)
+rightScroll(scrollRight)
+
+
+// hero btn
+function heroLeftScroll(direction) {
+    direction.addEventListener('click', () => {
+        scrollContainer(heroSlider, -heroScrollAmount); // scroll left for hero
+    });
+}
+
 function heroRightScroll(direction) {
     direction.addEventListener('click', () => {
         scrollContainer(heroSlider, heroScrollAmount); // scroll right for hero
     });
 
 }
+heroLeftScroll(leftBtn)
 heroRightScroll(rightBtn)
