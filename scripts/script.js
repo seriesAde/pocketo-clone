@@ -8,20 +8,13 @@ let scrollLeft = document.getElementById("scrollLeft")
 let scrollRight = document.getElementById("scrollRight")
 let firstcard = HeadspaceCollection.querySelector(".card");
 let body = document.querySelector("body")
-let pocketoP = document.getElementById("pocketoP")
+// let pocketoP = document.getElementById("pocketoP")
 let rightBtn = document.getElementById("rightBtn")
 let leftBtn = document.getElementById("leftBtn")
-let pocketoPaTag = document.getElementById("pocketoPaTag")
-let hidden = document.getElementById("hidden")
-let removePocketop = pocketoP
-let cartHidden = document.getElementById("cartHidden")
-let cartHiddenBtn = document.getElementById("cartHiddenBtn")
+// let pocketoPaTag = document.getElementById("pocketoPaTag")   
+// let hidden = document.getElementById("hidden")
 
 
-cartHiddenBtn.addEventListener("click", () => {
-    // body.classList.add("overflow-hidden");
-    cartHidden.classList.remove("hidden");
-});
 
 // pocketo window scroll hide
 window.addEventListener("scroll", () => {
@@ -31,22 +24,6 @@ window.addEventListener("scroll", () => {
         pocketoP.classList.remove("opacity-0", "-translate-y-2", "pointer-events-none", "max-h-0");
     }
 });
-let hide = true
-hidden.classList.add("opacity-0", "-translate-y-6", "pointer-events-none", "max-h-0");
-pocketoPaTag.addEventListener("click", () => {
-    if (hide) {
-        // hidden.classList.replace("hidden", "block")
-        hidden.classList.remove("opacity-0", "-translate-y-6", "pointer-events-none", "max-h-0");
-        hidden.classList.add("max-h-[500px]");
-        hide = false
-    } else {
-        hidden.classList.add("opacity-0", "-translate-y-6", "pointer-events-none", "max-h-0");
-        hidden.classList.remove("max-h-[500px]");
-        hide = true
-    }
-})
-
-
 
 async function displayProducts() {
     const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
@@ -58,10 +35,11 @@ async function displayProducts() {
         collection = "";
         data.data.forEach(prod => {
             collection += `
+           <a href="../item-page.html?Product_id=${prod.id}">
             <div class="card flex-none w-[25%] snap-start">
                 <div class="img-wrapper relative w-full">
                     <img 
-                        class="w-full transition-opacity duration-300" 
+                        class="w-full h-auto transition-opacity duration-300" 
                         src="${prod.image}" 
                         data-hover="${prod.images[1]}"
                         data-original="${prod.images[0]}"
@@ -73,9 +51,9 @@ async function displayProducts() {
                     </button>
                 </div>
 
-                <p class="font-medium text-2xl ">${prod.title}</p>
-                <h5 class="font-medium text-lg">${prod.price}</h5>
-            </div>
+                <a href="#" class="hover:text-gray-700"><p class="font-medium text-lg ">${prod.title}</p></a>
+                <h5 class="font-medium text-lg">₦${prod.price}</h5>
+            </div></a>
         `;
             HeadspaceCollection.innerHTML = collection
         });
@@ -104,7 +82,13 @@ async function displayProducts() {
                     img.style.opacity = 1;
                 }, 200);
             });
+            btn.addEventListener("click", () => {
+
+            })
         });
+        let addtoCartBtn
+
+
     } catch (error) {
         console.log(error)
     }
@@ -119,7 +103,6 @@ requestAnimationFrame(() => {
 
     HeadspaceCollection.scrollLeft = singleLoopWidth;
 });
-
 
 // infinite scroll card
 HeadspaceCollection.addEventListener("scroll", () => {
@@ -138,9 +121,6 @@ HeadspaceCollection.addEventListener("scroll", () => {
         HeadspaceCollection.style.scrollBehavior = "smooth";
     }
 });
-
-
-
 
 
 

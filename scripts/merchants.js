@@ -29,31 +29,31 @@ async function loadProducts() {
     if (vendor) {
         let id = vendor.vendor_id
         try {
-            const catRes = await fetch(`${baseApi}/categories?merchant_id=${id}`);
+            const catRes = await fetch(`${baseApi}/products?merchant_id=${id}`);
             const catData = await catRes.json();
 
             // display cat starts here
             const wrapper = document.getElementById("categories");
             wrapper.innerHTML = "";
 
-            catData.forEach(cat => {
-                wrapper.innerHTML +=
-                    `
-                       <a href="./allCat.html?category_id="${cat.id}"" class="w-[25%] grid grid-cols-1 justify-center items-center h-20 text-xs shadow-sm bg-white">
+            wrapper.innerHTML =
+                `
+                       <a href="./allCat.html?category_id="${catData.id}"" class="w-[25%] grid grid-cols-1 justify-center items-center h-20 text-xs shadow-sm bg-white">
                         <div class="categories ">
-                        <h1 class="font-semibold text-center  text-green-700 uppercase">${cat.name}</h1>
-                       <div class="flex justify-center"> <img class="size-15" src="${cat.image}"></div>
-                        </div></a>
+                        <h1 class="font-semibold text-center  text-green-700 capitalize"> Total Products: <span class="font-bold text-lg"> ${catData.total}</span></h1>
+                         </div></a>
                   
                      `;
 
 
 
-            });
+
 
             // display cat ends here
+            const categoryRes = await fetch(`${baseApi}/categories?merchant_id=${id}`);
+            const categoryData = await categoryRes.json();
             let categoryMap = {};
-            catData.forEach(cat => {
+            categoryData.forEach(cat => {
                 categoryMap[cat._id] = cat.name;
             });
 

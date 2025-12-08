@@ -2,6 +2,7 @@
 let registerInputFirstname = document.getElementById("registerInputFirstname");
 let registerInputLastname = document.getElementById("registerInputLastname");
 let registerInputEmail = document.getElementById("registerInputEmail");
+let registerInputPhone = document.getElementById("registerInputPhone");
 let registerInputPassword = document.getElementById("registerInputPwd");
 let registerButton = document.getElementById("registerButton");
 
@@ -9,7 +10,7 @@ let registerButton = document.getElementById("registerButton");
 const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 let validate = {
     first_name: false,
     last_name: false,

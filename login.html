@@ -29,7 +29,7 @@
                     </p>
                 </a>
                 <ul id="hidden"
-                    class="bg-white absolute rounded-lg border transition-all duration-200 ease-in-out border-gray-300 w-80">
+                    class=" bg-white absolute rounded-lg border transition-all duration-200 ease-in-out border-gray-300 w-80">
                     <li class="border-b border-gray-300">
                         <a class="flex items-center gap-3 py-3 px-4" href="#">
                             <img src="./images/pkImages/miracle_favicon.png" class="w-6 h-6" alt="">
@@ -109,30 +109,107 @@
                     <li><a href="./login.html"><img class="w-7"
                                 src="./images/icons/person_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
                         </a> </li>
-                    <li><img class="w-7"
-                            src="./images/icons/add_shopping_cart_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    <li><a id="cartHiddenBtn" href="#">
+                            <img class="w-7"
+                                src="./images/icons/add_shopping_cart_24dp_0085CA_FILL0_wght400_GRAD0_opsz24.svg"
+                                alt="">
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+
+    <!-- cart -->
+    <div id="cartHidden" class="hidden">
+        <div class=" absolute z-100 w-full h-[83vh] mt-[8%] flex">
+            <div class="w-full h-2px bg-black opacity-10">
+            </div>
+            <div id="cart" class="w-[70%] max-w-2xl  bg-white p-6 shadow-lg rounded-lg overflow-auto ">
+
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Your Cart</h2>
+                    <button id="XBtn" class="cursor-pointer text-gray-400 hover:text-gray-600">
+                        <!-- Close Icon (using a simple 'X') -->
+                        <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Progress Indicator Placeholder (as seen at the top right of the image) -->
+                <div class="mb-6">
+                    <div class="flex items-center">
+                        <div class="flex-grow bg-blue-100 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                        <svg xmlns="www.w3.org" class="h-6 w-6 text-blue-500 ml-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Cart Item List -->
+                <div id="cartItemDetails" class="mt-10">
+
+                </div>
+
+                <!-- Totals Summary -->
+                <div class="mt-5 pt-4">
+                    <div class="flex justify-between items-center text-sm font-medium text-gray-800">
+                        <span>Total (<span>1</span> item)</span>
+                        <span id="totalCart"></span>
+                    </div>
+                    <p class=" font-medium text-black mt-1">Taxes, shipping & promos calculated at checkout</p>
+                </div>
+
+                <!-- Checkout Button -->
+                <div class="mt-5">
+                    <button
+                        class="w-full bg-blue-600 hover:bg-blue-400 text-white font-semibold py-5 px-4 rounded-full flex items-center justify-center shadow-md">
+                        <svg xmlns="www.w3.org" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm0-10h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                        CHECKOUT
+                    </button>
+                </div>
+
+                <!-- Payment Icons -->
+                <div class="mt-5 flex justify-center gap-15 ">
+                    <!-- Placeholders for payment icons -->
+                    <img class="size-8" src="./images/icons/apple-pay.png" alt="Google Pay" class="h-4">
+                    <img class="size-5" src="./images/icons/search (1).png" alt="Google Pay" class="h-4">
+                    <img class="size-5" src="./images/icons/visa.png" alt="Visa" class="h-4">
+                    <img class="size-5" src="./images/icons/card.png" alt="Mastercard" class="h-4">
+                    <img class="size-5" src="./images/icons/amex.png" alt="American Express" class="h-4">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- carts ends here -->
+
     <div class="pt-30">
         <form action="" class="w-[35%] m-auto mt-10 block">
             <h1 class="text-5xl font-bold text-center">Login</h1>
             <div class="mt-10">
                 <input class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black" type="email"
-                    placeholder="Email" name="" id="">
+                    placeholder="Email" name="" id="mail">
             </div>
             <div class="mt-10 hover:placeholder:text-gray-700">
                 <input class="bg-gray-100 w-full h-10 px-3 hover:placeholder:text-black" type="password"
-                    placeholder="password" name="password" id="">
+                    placeholder="password" name="password" id="pwd">
             </div>
             <div class="mt-10"> <a class="underline capitalize font-medium  hover:text-gray-700" href="">
                     <p>forgot your password?</p>
                 </a>
             </div>
-            <div class="mt-2"> <button
-                    class="bg-blue-500 hover:bg-blue-400 text-white py-4 font-medium rounded-full w-full m-auto">sign
+            <div class="mt-2"> <button id="loginBtn"
+                    class="bg-blue-500 hover:bg-blue-400 cursor-pointer text-white py-4 font-medium rounded-full w-full m-auto">sign
                     in</button></div>
             <div class="w-[60%] text-center m-auto hover:text-gray-700 my-2"> <a href="./register.html"
                     class=" underline  ">Create
@@ -232,5 +309,6 @@
     </footer>
 </body>
 <script src="./scripts/login.js"></script>
+<script src="./scripts/cart.js"></script>
 
 </html>

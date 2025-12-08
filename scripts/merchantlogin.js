@@ -37,8 +37,6 @@ login_btn.addEventListener("click", async (e) => {
                 vendor_first_name: data.first_name,
                 vendor_last_name: data.last_name
             }
-            console.log(data.password)
-
             if (data.email && data.id) {
                 localStorage.setItem("My_vendor", JSON.stringify(vendorDetails));
                 alert("logged in successfully");

@@ -121,16 +121,16 @@
         </nav>
     </header>
     <!-- cart starts here -->
+    <!-- cart -->
     <div id="cartHidden" class="hidden">
         <div class=" absolute z-100 w-full h-[83vh] mt-[8%] flex">
             <div class="w-full h-2px bg-black opacity-10">
-
             </div>
-            <div class="w-[70%] max-w-2xl  bg-white p-6 shadow-lg rounded-lg overflow-auto hide">
+            <div id="cart" class="w-[70%] max-w-2xl  bg-white p-6 shadow-lg rounded-lg overflow-auto ">
 
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">Your Cart</h2>
-                    <button class="text-gray-400 hover:text-gray-600">
+                    <button id="XBtn" class="cursor-pointer text-gray-400 hover:text-gray-600">
                         <!-- Close Icon (using a simple 'X') -->
                         <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -153,48 +153,15 @@
                 </div>
 
                 <!-- Cart Item List -->
-                <div class="mt-10">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-5 w-full ">
-                            <!-- Item Image Placeholder -->
-                            <img src="./images/PK-5050-Hero-Poketo_Essentials_-_Summer_2024_Collection.webp"
-                                alt="Headspace x Poketo Pens" class="w-25 h-30 rounded object-cover">
-                            <div class=" w-full flex flex-col justify-between h-24">
+                <div id="cartItemDetails" class="mt-10">
 
-                                <div class="flex justify-between items-end w-full">
-                                    <p class="text-sm font-medium text-black">Headspace x Poketo Pens</p>
-                                    <button class="text-gray-400 hover:text-gray-600">
-                                        <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
-
-                                </div>
-                                <div class="flex justify-between items-end w-full">
-                                    <div class="">
-                                        <p class="text-sm font-medium text-black">$14.00</p>
-                                    </div>
-                                    <div class="flex items-center border border-[#0085ca] rounded-full">
-                                        <button
-                                            class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-l-full">-</button>
-                                        <span class="px-3 py-1 text-sm">1</span>
-                                        <button
-                                            class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-r-full">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
                 <!-- Totals Summary -->
                 <div class="mt-5 pt-4">
                     <div class="flex justify-between items-center text-sm font-medium text-gray-800">
                         <span>Total (<span>1</span> item)</span>
-                        <span>$14.00</span>
+                        <span id="totalCart"></span>
                     </div>
                     <p class=" font-medium text-black mt-1">Taxes, shipping & promos calculated at checkout</p>
                 </div>
@@ -366,7 +333,7 @@
             </div>
         </div>
 
-        <div id="HeadspaceCollection" class="flex w-full overflow-x-auto gap-8  snap-x  ">
+        <div id="HeadspaceCollection" class="flex w-full overflow-x-auto gap-10  snap-x  ">
         </div>
     </div>
     <!-- style and substance -->
