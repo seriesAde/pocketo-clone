@@ -1,2 +1,2 @@
-# pocketo-clone
-my mini project
+# pocket-clone
+using js html and css only 

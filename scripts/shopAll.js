@@ -33,6 +33,13 @@ async function displayProducts() {
                 <h5 class="font-medium text-lg">${prod.price}</h5>
             </div>
         `;
+            obj = {
+                id: prod.id,
+                title: prod.title,
+                price: prod.price,
+                image: prod.images[0],
+                quantity: 1
+            }
             HeadspaceCollection.innerHTML = collection
         });
 
@@ -60,6 +67,15 @@ async function displayProducts() {
                     img.style.opacity = 1;
                 }, 200);
             });
+
+            let addtoCartBtn = document.querySelectorAll(".hover-btn")
+            addtoCartBtn.forEach(cardBtn => {
+                cardBtn.addEventListener("click", (e) => {
+                    e.preventDefault()
+                    addToCart()
+
+                })
+            })
         });
     } catch (error) {
         console.log(error)
@@ -68,34 +84,12 @@ async function displayProducts() {
     let cartBtn = document.querySelectorAll(".cartBtn")
     cartBtn.forEach(btn => {
         btn.addEventListener("click", async () => {
-            let productId = btn.dataset.id;
-            let user = JSON.parse(localStorage.getItem("My_User"));
-            let user_id = user.user_id
-            let cart_obj = {
-                quantity: 1,
-                user_id: user_id,
-                product_id: productId,
-                has_variation: false
-            }
+
             console.log(user_id)
             console.log(productId)
             try {
-                let response = await fetch(`${baseApi}/carts`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(cart_obj),
-                });
-                if (!response.ok) {
-                    const msg = await response.text();
-                    console.log("Server error:", msg);
-                    alert("Registration failed.");
-                    return;
-                } else {
-                    alert("product added to cart")
-                    window.location.reload()
-                }
+
+
             } catch (error) {
                 console.log(error);
             }
@@ -103,86 +97,37 @@ async function displayProducts() {
     });
 }
 displayProducts()
+let arr = JSON.parse(localStorage.getItem("myCartDetails")) || [];
+let obj = {}
 
+// cart function 
+function addToCart() {
+    // if (arr.id == obj.id) {
+    //     alert("its thesame")
+    //     console.log(obj)
+    //     return;
+    // }
 
-async function cartProductDetails() {
-    let user = JSON.parse(localStorage.getItem("My_User"));
-    let cartItemDetails = document.getElementById("cartItemDetails")
-    let totalCart = document.getElementById("totalCart")
-    let user_id = user.user_id
-    let content = "";
-    let total = "";
-    try {
-        let cartRes = await fetch(`${baseApi}/carts?user_id=${user_id}`)
-        let cartData = await cartRes.json()
-        console.log(cartData)
-        for (const item of cartData) {
-            console.log(item)
-            for (let product of item.products) {
-                // console.log(product.id)
-                const productRes = await fetch(`${baseApi}/products/${product.id}`);
-                const productData = await productRes.json();
-                console.log(productData)
-                console.log(product.quantity)
-
-                content += `
-                <div class="mt-10"> 
-                <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-5 w-full ">
-                                    <!-- Item Image Placeholder -->
-                                    <img src="${productData.images[0]}"
-                                        alt="Headspace x Poketo Pens" class="w-25 h-30 rounded object-cover">
-                                    <div class=" w-full flex flex-col justify-between h-24">
-        
-                                        <div class="flex justify-between items-end w-full">
-                                            <p class="text-sm font-medium text-black">${productData.title}</p>
-                                            <button class="text-gray-400 hover:text-gray-600">
-                                                <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-        
-                                        </div>
-                                        <div class="flex justify-between items-end w-full">
-                                            <div class="">
-                                                <p class="text-sm font-medium text-black">₦${productData.price}</p>
-                                            </div>
-                                            <div class="flex items-center border border-[#0085ca] rounded-full">
-                                                <button
-                                                    class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-l-full">-</button>
-                                                <span class="px-3 py-1 text-sm">${product.quantity}</span>
-                                                <button
-                                                    class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-r-full">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                            </div></div>
-                `;
-
-                total = `
-               ₦${item.amount}
-                `
-                cartItemDetails.innerHTML = content
-                totalCart.innerHTML = total
-            }
-
-
+    if (arr != []) {
+        let find = arr.find((item) => item.id == obj.id)
+        if (find) {
+            alert("order already in cart")
+            return
+        } else {
+            arr.push(obj)
+            localStorage.setItem("myCartDetails", JSON.stringify(arr));
+            alert("Food added to orders successfully");
+            console.log(obj)
         }
-
-
-
-
-
-    } catch (error) {
-        console.log(error)
+    } else {
+        arr.push(obj)
+        localStorage.setItem("myCartDetails", JSON.stringify(arr));
+        alert("Food added to orders successfully");
+        console.log(obj)
     }
+    window.location.reload()
 
-
-    // const showMore = document.getElementById('showMore');
-    // showMore.addEventListener('click', toggleText);
 }
+
+
 // cartProductDetails()

@@ -64,87 +64,99 @@ pocketoPaTag.addEventListener("click", () => {
 
 
 async function cartProductDetails() {
-    const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
-    let user = JSON.parse(localStorage.getItem("My_User"));
-    if (user) {
-        let cartItemDetails = document.getElementById("cartItemDetails")
-        let totalCart = document.getElementById("totalCart")
-        let user_id = user.user_id
+
+    // const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
+    let vendor = JSON.parse(localStorage.getItem("My_vendor"));
+    let CartDetails = JSON.parse(localStorage.getItem("myCartDetails")) || []
+    let cartItemDetails = document.getElementById("cartItemDetails")
+    console.log(CartDetails)
+    if (vendor) {
+        // let totalCart = document.getElementById("totalCart")
+        // let user_id = user.user_id
+        console.log()
         let content = "";
-        let total = "";
-
         try {
-            let cartRes = await fetch(`${baseApi}/carts?user_id=${user_id}`)
-            let cartData = await cartRes.json()
-            console.log(cartData)
-            for (const item of cartData) {
-                console.log(item)
-                for (let product of item.products) {
-                    // console.log(product.id)
-                    const productRes = await fetch(`${baseApi}/products/${product.id}`);
-                    const productData = await productRes.json();
-                    console.log(productData)
-                    console.log(product.quantity)
-
-                    content += `
-                <div class="mt-10"> 
-                <div class="flex items-center justify-between">
+            CartDetails.forEach(item => {
+                // console.log(Number(item.price))
+                content +=
+                    `
+                    <div class="mt-10">
+                            <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-5 w-full ">
                                     <!-- Item Image Placeholder -->
-                                    <img src="${productData.images[0]}"
-                                    alt="Headspace x Poketo Pens" class="w-25 h-30 rounded object-cover">
+                                    <img src="${item.image}" alt="Headspace x Poketo Pens"
+                                        class="w-25 h-30 rounded object-cover">
                                     <div class="flex justify-between items-end w-full">
                                         <div class=" w-full flex flex-col justify-between h-24">
-                                         <div class="flex justify-between items-end w-full">
-                                                <p class="text-sm font-medium text-black">${productData.title}</p>
-                                                
-                                                <button class="text-gray-400 hover:text-gray-600">
+                                            <div class="flex justify-between items-end w-full">
+                                                <p class="text-sm font-medium text-black">${item.title}</p>
+
+                                                <button id=${item.id} class="removeItem text-gray-400 hover:text-gray-600">
                                                     <svg xmlns="www.w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                                         stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
                                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
                                                 </button>
-                                                 </div>
+                                            </div>
 
-                                         <div class="flex justify-between items-end w-full">
-                                            <div class="">
-                                                <p class="text-sm font-medium text-black">₦${productData.price}</p>
+                                            <div class="flex justify-between items-end w-full">
+                                                <div class="">
+                                                    <p class="text-sm font-medium text-black">₦${item.price}</p>
+                                                </div>
+                                                <div class="flex items-center border border-[#0085ca] rounded-full">
+                                                    <button
+                                                        class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-l-full">-</button>
+                                                    <span class="px-3 py-1 text-sm">${item.quantity}</span>
+                                                    <button
+                                                        class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-r-full">+</button>
+                                                </div>
                                             </div>
-                                            <div class="flex items-center border border-[#0085ca] rounded-full">
-                                                <button
-                                                    class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-l-full">-</button>
-                                                <span class="px-3 py-1 text-sm">${product.quantity}</span>
-                                                <button
-                                                    class="px-2 cursor-pointer py-1 text-gray-600 hover:bg-gray-100 rounded-r-full">+</button>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
-        
-                            </div></div>
-                `;
+                            </div>
+                        </div>
+                    `
 
-                    total = `
-               ₦${item.amount}
-                `
-                    cartItemDetails.innerHTML = content
-                    totalCart.innerHTML = total
-                }
+            });
+            // total items 
+            cartItemDetails.innerHTML = content
+            let total = document.getElementById("total")
+            let totalItems = CartDetails.length;
+            total.innerHTML = totalItems
+            // total amount
+            let getSubTotals = CartDetails.map((item) => Number(item.price));
+            let add_totals = getSubTotals.reduce((x, y) => {
+                return x + y;
+            }, 0);
+            console.log(add_totals)
+            let totalCart = add_totals
+            let htmlTotalCart = document.getElementById("totalCart")
+
+            htmlTotalCart.innerHTML = totalCart
+            let removeItem = document.querySelectorAll(".removeItem")
+            removeItem.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault()
 
 
-            }
-
-
-
+                    let removeItem = CartDetails.filter((item) => item.id != btn.id);
+                    localStorage.setItem("myCartDetails", JSON.stringify(removeItem));
+                    alert("Item removed");
+                    window.location.reload()
+                })
+            });
 
 
 
         } catch (error) {
             console.log(error)
         }
-        user_id
+
+    } else {
+        alert("no merchant product to show")
     }
 
     // const showMore = document.getElementById('showMore');
@@ -152,7 +164,9 @@ async function cartProductDetails() {
 
 }
 
-cartProductDetails()
+document.addEventListener("DOMContentLoaded", () => {
+    cartProductDetails();
+});
 
 
 
