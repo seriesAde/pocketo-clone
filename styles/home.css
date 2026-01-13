@@ -1,0 +1,103 @@
+#HeadspaceCollection::-webkit-scrollbar {
+    display: none;
+}
+
+/* For Firefox */
+#HeadspaceCollection {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* IE 10+ */
+}
+
+#heroSlider {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#heroSlider::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+header {
+    position: fixed;
+    z-index: 9999;
+}
+
+nav {
+    position: relative;
+    z-index: 9999;
+}
+
+#pocketoP {
+    /* Base styles - visible state */
+
+    transition: all 0.5s ease-in-out;
+    /* Smooth transition for opacity */
+
+    /* Allows clicks when visible */
+}
+
+.tree {
+    background-color: #A38AC1;
+}
+
+.style {
+    background-color: #FFB3AB;
+}
+
+.spark {
+    background-color: #FFD46F;
+}
+
+.planning {
+    background-color: rgb(240, 192, 208);
+}
+
+.hide-pocket {
+
+    pointer-events: none;
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+
+/* infinite scroll */
+
+
+
+/* .marquee-content {
+
+
+    animation: scroll 20s linear infinite;
+
+}
+
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+       
+    }
+}
+
+
+.marquee-content::-webkit-scrollbar {
+    display: none;
+} */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* For Firefox */
+}

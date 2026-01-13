@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- <script src="./tailwind.js"></script> -->
+    <link rel="stylesheet" href="../styles/home.css">
+</head>
+
+<body>
+
+    <div class="flex ">
+        <div class="w-[20%]  bg-[#0085ca]  h-[100vh] text-white">
+            <div class="w-[80%] mt-5 m-auto h-[80%]">
+                <div class=""> <a href="../index.html"><img class="" src="../images/pkImages/pk-logotype-light.png"
+                            alt="logo"></a>
+                </div>
+                <div class="flex flex-col justify-between h-full ">
+                    <ul clasds="flex  ">
+                        <li class="my-5"><a href="./merchant.html">Home</a></li>
+                        <li class="my-5"><a href="../item-page.html">Shop</a></li>
+                        <li class="my-5"><a href="./merchant.html">Merchant</a></li>
+                        <li class="my-5"><a href="./about.html">About</a></li>
+                    </ul>
+                    <ul>
+                        <!-- <li class="my-5 item-end"><a href="../merchantLogin.html">sign out</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="w-full">
+
+            <div class="pt-30">
+                <form action="" class="w-[35%] m-auto mt-10 block">
+                    <h1 class="text-5xl font-bold text-center">Login</h1>
+                    <div class="mt-10">
+                        <input class="bg-gray-100 w-full h-10 px-3 outline-none hover:placeholder:text-black"
+                            type="email" placeholder="Email" name="" id="mail">
+                    </div>
+                    <div class="mt-10 hover:placeholder:text-gray-700">
+                        <input class="bg-gray-100 w-full h-10 px-3 outline-none hover:placeholder:text-black"
+                            type="password" placeholder="password" name="password" id="pwd">
+                    </div>
+                    <div class="mt-10"> <a class="underline capitalize font-medium  hover:text-gray-700" href="">
+                            <p>forgot your password?</p>
+                        </a>
+                    </div>
+                    <div class="mt-2"> <button id="loginBtn"
+                            class="bg-blue-500 hover:bg-blue-400 cursor-pointer text-white py-4 font-medium rounded-full w-full m-auto">sign
+                            in</button></div>
+                    <div class="w-[60%] text-center m-auto hover:text-gray-700 my-2"> <a href="./merchantRegister.html"
+                            class=" underline  ">Create
+                            account</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script src="../scripts/merchantlogin.js"></script>
+
+</html>

@@ -1,0 +1,245 @@
+
+
+
+
+let HeadspaceCollection = document.getElementById("HeadspaceCollection")
+let heroSlider = document.getElementById("heroSlider")
+let scrollLeft = document.getElementById("scrollLeft")
+let scrollRight = document.getElementById("scrollRight")
+let firstcard = HeadspaceCollection.querySelector(".card");
+let body = document.querySelector("body")
+// let pocketoP = document.getElementById("pocketoP")
+let rightBtn = document.getElementById("rightBtn")
+let leftBtn = document.getElementById("leftBtn")
+// let pocketoPaTag = document.getElementById("pocketoPaTag")   
+// let hidden = document.getElementById("hidden")
+
+
+
+// pocketo window scroll hide
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        pocketoP.classList.add("opacity-0", "-translate-y-2", "pointer-events-none", "max-h-0");
+    } else {
+        pocketoP.classList.remove("opacity-0", "-translate-y-2", "pointer-events-none", "max-h-0");
+    }
+});
+let arr = JSON.parse(localStorage.getItem("myCartDetails")) || [];
+let obj = {}
+async function displayProducts() {
+    const baseApi = "http://ecommerce.reworkstaging.name.ng/v2";
+    let vendor = JSON.parse(localStorage.getItem("My_vendor"));
+    let id = vendor.vendor_id
+    try {
+        let result = await fetch(`${baseApi}/products?merchant_id=${id}`)
+        let data = await result.json();
+        collection = "";
+        data.data.forEach(prod => {
+            collection += `
+            <div class="card flex-none w-[25%] snap-start">
+            <div class="img-wrapper relative w-full">
+            <a href="../item-page.html?Product_id=${prod.id}">
+                    <img 
+                        class="w-full h-auto transition-opacity duration-300" 
+                        src="${prod.image}" 
+                        data-hover="${prod.images[1]}"
+                        data-original="${prod.images[0]}"
+                        />
+                        </a>
+
+                    <button class="hover-btn cursor-pointer w-[80%] m-auto absolute font-bold  bottom-4 left-1/2 -translate-x-1/2 
+                        bg-white text-black px-3 py-4 rounded-full opacity-0 transition-opacity duration-300">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <a href="#" class="hover:text-gray-700"><p class="font-medium text-lg ">${prod.title}</p></a>
+                <h5 class="font-medium text-lg">₦${prod.price}</h5>
+            </div>
+        `;
+            obj = {
+                id: prod.id,
+                title: prod.title,
+                price: prod.price,
+                image: prod.images[0],
+                quantity: 1
+            }
+
+            HeadspaceCollection.innerHTML = collection
+        });
+
+        let container = document.querySelectorAll(".img-wrapper")
+        container.forEach(item => {
+            let img = item.querySelector("img");
+            let btn = item.querySelector(".hover-btn");
+
+            item.addEventListener("mouseenter", () => {
+                img.style.opacity = 0;
+                btn.style.opacity = 1; // fade button in
+
+                setTimeout(() => {
+                    img.src = img.dataset.hover;
+                    img.style.opacity = 1;
+                }, 200);
+            });
+
+            item.addEventListener("mouseleave", () => {
+                img.style.opacity = 0;
+                btn.style.opacity = 0; // fade button out
+
+                setTimeout(() => {
+                    img.src = img.dataset.original;
+                    img.style.opacity = 1;
+                }, 200);
+            });
+            btn.addEventListener("click", () => {
+
+            })
+        });
+        let addtoCartBtn = document.querySelectorAll(".hover-btn")
+        addtoCartBtn.forEach(cardBtn => {
+            cardBtn.addEventListener("click", (e) => {
+                e.preventDefault()
+                addToCart()
+
+            })
+        })
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+displayProducts()
+
+// cart function 
+function addToCart() {
+    if (arr != []) {
+        let find = arr.find((item) => item.id == obj.id)
+        if (find) {
+            alert("order already in cart")
+            return
+        } else {
+            arr.push(obj)
+            localStorage.setItem("myCartDetails", JSON.stringify(arr));
+            alert("Food added to orders successfully");
+            console.log(obj)
+        }
+    } else {
+        arr.push(obj)
+        localStorage.setItem("myCartDetails", JSON.stringify(arr));
+        alert("Food added to orders successfully");
+        console.log(obj)
+    }
+    window.location.reload()
+
+}
+
+
+
+let singleLoopWidth;
+requestAnimationFrame(() => {
+    singleLoopWidth = HeadspaceCollection.scrollWidth / 3;
+
+    HeadspaceCollection.scrollLeft = singleLoopWidth;
+});
+
+// infinite scroll card
+HeadspaceCollection.addEventListener("scroll", () => {
+
+    if (!singleLoopWidth) return;
+
+    if (HeadspaceCollection.scrollLeft >= singleLoopWidth * 2) {
+        HeadspaceCollection.style.scrollBehavior = "auto";
+        HeadspaceCollection.scrollLeft -= singleLoopWidth;
+        HeadspaceCollection.style.scrollBehavior = "smooth";
+    }
+
+    if (HeadspaceCollection.scrollLeft <= 0) {
+        HeadspaceCollection.style.scrollBehavior = "auto";
+        HeadspaceCollection.scrollLeft += singleLoopWidth;
+        HeadspaceCollection.style.scrollBehavior = "smooth";
+    }
+});
+
+
+
+let marquee = document.querySelector('.marquee');
+let marqueeContent = document.querySelector('.marquee-content');
+let scrollPos = 0;
+
+function tick() {
+    scrollPos += 1; // pixels per frame
+    if (scrollPos >= marqueeContent.scrollWidth / 2) {
+        scrollPos -= marqueeContent.scrollWidth / 2;
+
+    } // reset after half (duplicate)
+    marquee.scrollLeft = scrollPos;
+    requestAnimationFrame(tick);
+}
+
+tick();
+
+
+function scrollContainer(container, amount) {
+    container.scrollBy({
+        left: amount,
+        behavior: 'smooth'
+
+    });
+}
+
+
+
+
+
+let scrollAmount;
+if (firstcard) {
+    scrollAmount = firstcard.offsetWidth
+
+} else {
+    scrollAmount = 360;
+}
+
+let heroScrollAmount;
+if (heroSlider) {
+    heroScrollAmount = heroSlider.offsetWidth
+
+} else {
+    heroScrollAmount = 360;
+}
+
+
+
+// infinite btn
+function leftScroll(direction) {
+    direction.addEventListener('click', () => {
+        scrollContainer(HeadspaceCollection, -scrollAmount); // scroll left for cards
+    });
+}
+leftScroll(scrollLeft)
+
+function rightScroll(direction) {
+    direction.addEventListener('click', () => {
+        scrollContainer(HeadspaceCollection, scrollAmount); // scroll right for cards
+    });
+
+}
+rightScroll(scrollRight)
+
+
+// hero btn
+function heroLeftScroll(direction) {
+    direction.addEventListener('click', () => {
+        scrollContainer(heroSlider, -heroScrollAmount); // scroll left for hero
+    });
+}
+
+function heroRightScroll(direction) {
+    direction.addEventListener('click', () => {
+        scrollContainer(heroSlider, heroScrollAmount); // scroll right for hero
+    });
+
+}
+heroLeftScroll(leftBtn)
+heroRightScroll(rightBtn)
